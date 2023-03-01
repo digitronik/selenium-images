@@ -15,6 +15,10 @@ jobs:
         uses: redhat-actions/buildah-build@v2.5
         with:
           image: quay.io/redhatqe/selenium-standalone
+          tags: test
           dockerfiles: standalone/Dockerfile
           context: standalone
           oci: true
+      - name: Run selenium server
+        run: podman run -it -p 4444:4444 -p 5999:5999 quay.io/redhatqe/selenium-standalone:test
+      
